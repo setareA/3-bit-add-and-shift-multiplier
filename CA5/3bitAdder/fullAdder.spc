@@ -1,52 +1,37 @@
-* SPICE export by:  S-Edit 16.01
-* Export time:      Wed Jan 23 20:53:43 2019
-* Design:           FullAdder
-* Cell:             fullAdder
-* Interface:        view0
-* View:             view0
-* View type:        connectivity
-* Export as:        top-level cell
-* Export mode:      hierarchical
-* Exclude empty cells: no
-* Exclude .model:   yes
-* Exclude .end:     no
-* Exclude simulator commands:     no
-* Expand paths:     yes
-* Wrap lines:       80 characters
-* Root path:        C:\Users\Lenovo-pc\Documents\Tanner EDA\Tanner Tools v16.0\FullAdder\FullAdder
-* Exclude global pins:   no
-* Exclude instance locations: no
-* Control property name(s): SPICE
+.inc '180nm_bulk.pm'
 
-********* Simulation Settings - General Section *********
+vdd vdd gnd 3.3
+vX X gnd pulse(0 3.3 0 .1n .1n 15n 30n)
+vY Y gnd pulse(0 3.3 0 .1n .1n 10n 30n)
+vZ Z gnd pulse(0 3.3 0 .1n .1n 5n 100n)
 
 *************** Subcircuits *****************
 .subckt Inverter In Out Gnd Vdd 
-MMn1 Out In Gnd 0 NMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-1007 
+MMn1 Out In Gnd 0 nmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-1007 
 +$y=-600 $w=414 $h=600
-MMp1 Out In Vdd Vdd PMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-1007 
+MMp1 Out In Vdd Vdd pmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-1007 
 +$y=0 $w=414 $h=600
 .ends
 
 .subckt NAND A B Out Gnd Vdd 
-MMn1 Out A N_1 0 NMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=393 
+MMn1 Out A N_1 0 nmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=393 
 +$y=-500 $w=414 $h=600
-MMn2 N_1 B Gnd 0 NMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=393 
+MMn2 N_1 B Gnd 0 nmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=393 
 +$y=-1100 $w=414 $h=600
-MMp1 Out A Vdd Vdd PMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-307 
+MMp1 Out A Vdd Vdd pmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=-307 
 +$y=400 $w=414 $h=600
-MMp2 Out B Vdd Vdd PMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=993 
+MMp2 Out B Vdd Vdd pmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=993 
 +$y=400 $w=414 $h=600
 .ends
 
 .subckt NOR A B Out Gnd Vdd 
-MMn1 Out A Gnd 0 NMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=93 
+MMn1 Out A Gnd 0 nmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=93 
 +$y=-400 $w=414 $h=600
-MMn2 Out B Gnd 0 NMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=1393 
+MMn2 Out B Gnd 0 nmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=1393 
 +$y=-400 $w=414 $h=600
-MMp1 Out B N_1 Vdd PMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=693 
+MMp1 Out B N_1 Vdd pmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=693 
 +$y=300 $w=414 $h=600
-MMp2 N_1 A Vdd Vdd PMOS25 W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=693 
+MMp2 N_1 A Vdd Vdd pmos W=1.5u L=250n M=1 AS=975f PS=4.3u AD=975f PD=4.3u $ $x=693 
 +$y=900 $w=414 $h=600
 .ends
 
@@ -80,8 +65,12 @@ XhalfAdder_2 N_2 Z N_3 S Gnd Vdd halfAdder $ $x=2600 $y=-200 $w=1800 $h=1000
 XOR_1 N_1 N_3 C Gnd Vdd OR $ $x=4500 $y=700 $w=1800 $h=1000
 
 ********* Simulation Settings - Analysis Section *********
-
-********* Simulation Settings - Additional SPICE Commands *********
+.tran 1n 40n 
+.print tran C
+.print tran S
+.print tran X
+.print tran Y
+.print tran Z
 
 .end
 
